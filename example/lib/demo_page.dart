@@ -100,6 +100,7 @@ class _DemoPageState extends State<DemoPage> {
       controller: controller,
       width: screenWidth,
       height: screenWidth * 1.5,
+
     );
   }
 }
