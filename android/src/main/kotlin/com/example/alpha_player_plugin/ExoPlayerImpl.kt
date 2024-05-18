@@ -45,15 +45,6 @@ class ExoPlayerImpl(private val context: Context) : AbsPlayer(context) {
             errorListener?.onError(0, 0, "ExoPlayer on error: " + Log.getStackTraceString(error))
         }
     }
-
-    override fun getPlayerType(): String {
-        return "ExoPlayerImpl"
-    }
-
-    override fun getVideoInfo(): VideoInfo {
-        return VideoInfo(currVideoWidth, currVideoHeight)
-    }
-
     @OptIn(UnstableApi::class) override fun initMediaPlayer() {
         exoPlayer = ExoPlayer.Builder(context)
             .setRenderersFactory(
@@ -64,8 +55,10 @@ class ExoPlayerImpl(private val context: Context) : AbsPlayer(context) {
         exoPlayer.repeatMode = REPEAT_MODE_ONE
     }
 
-    override fun pause() {
-        exoPlayer.playWhenReady = false
+    override fun setDataSource(dataPath: String) {
+        reset()
+        val mediaItem = MediaItem.fromUri(Uri.parse(dataPath))
+        exoPlayer.setMediaItem(mediaItem)
     }
 
     override fun prepareAsync() {
@@ -73,8 +66,16 @@ class ExoPlayerImpl(private val context: Context) : AbsPlayer(context) {
         exoPlayer.playWhenReady = true
     }
 
-    override fun release() {
-        exoPlayer.release()
+    override fun start() {
+        exoPlayer.play()
+    }
+
+    override fun pause() {
+        exoPlayer.playWhenReady = false
+    }
+
+    override fun stop() {
+        exoPlayer.stop()
     }
 
     override fun reset() {
@@ -82,10 +83,8 @@ class ExoPlayerImpl(private val context: Context) : AbsPlayer(context) {
         exoPlayer.clearMediaItems()
     }
 
-    override fun setDataSource(dataPath: String) {
-        reset()
-        val mediaItem = MediaItem.fromUri(Uri.parse(dataPath))
-        exoPlayer.setMediaItem(mediaItem)
+    override fun release() {
+        exoPlayer.release()
     }
 
     override fun setLooping(looping: Boolean) {
@@ -100,11 +99,11 @@ class ExoPlayerImpl(private val context: Context) : AbsPlayer(context) {
         exoPlayer.setVideoSurface(surface)
     }
 
-    override fun start() {
-        exoPlayer.play()
+    override fun getVideoInfo(): VideoInfo {
+        return VideoInfo(currVideoWidth, currVideoHeight)
     }
 
-    override fun stop() {
-        exoPlayer.stop()
+    override fun getPlayerType(): String {
+        return "ExoPlayerImpl"
     }
 }

@@ -4,13 +4,10 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext.kotlin_version = '1.6.10'
     repositories {
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
-        maven { url 'https://maven.aliyun.com/nexus/content/repositories/releases' }
-        maven {url 'https://storage.flutter-io.cn/download.flutter.io'}
-        maven {url 'https://developer.huawei.com/repo/'}
+        google()
+        mavenCentral()
         maven { url 'https://jitpack.io' }
+        jcenter()
     }
 
     dependencies {
