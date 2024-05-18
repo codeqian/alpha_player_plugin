@@ -4,12 +4,15 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.view.Surface
+import androidx.annotation.OptIn
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.Player.REPEAT_MODE_OFF
 import androidx.media3.common.Player.REPEAT_MODE_ONE
 import androidx.media3.common.VideoSize
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
 import com.ss.ugc.android.alpha_player.model.VideoInfo
 import com.ss.ugc.android.alpha_player.player.AbsPlayer
