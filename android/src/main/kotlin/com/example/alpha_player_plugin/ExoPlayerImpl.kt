@@ -51,12 +51,8 @@ class ExoPlayerImpl(private val context: Context) : AbsPlayer(context) {
         return VideoInfo(currVideoWidth, currVideoHeight)
     }
 
-    @OptIn(UnstableApi::class) override fun initMediaPlayer() {
-        exoPlayer = ExoPlayer.Builder(context)
-            .setRenderersFactory(
-                DefaultRenderersFactory(context).setEnableDecoderFallback(true)
-            )
-            .build()
+    override fun initMediaPlayer() {
+        exoPlayer = ExoPlayer.Builder(context).build()
         exoPlayer.addListener(exoPlayerListener)
         exoPlayer.repeatMode = REPEAT_MODE_ONE
     }
