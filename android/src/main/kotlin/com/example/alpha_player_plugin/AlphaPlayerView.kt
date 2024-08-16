@@ -111,7 +111,8 @@ class AlphaPlayerView(context: Context, viewId: Int, private val messenger: Bina
         detachView()
     }
 
-    override fun getLifecycle(): Lifecycle = mRegistry
+    override val lifecycle: Lifecycle
+        get() = mRegistry
 
     private fun initPlayerController(context: Context, owner: LifecycleOwner) {
         val configuration = Configuration(context, owner)
